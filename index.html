@@ -3,107 +3,219 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advanced UI</title>
+<title>Gaweshanayen Obbata</title>
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Segoe UI', sans-serif;
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+    user-select: none;
+}
 
-    body {
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(135deg, #1e3c72, #2a5298);
-        overflow: hidden;
-    }
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
 
-    /* Floating background bubbles */
-    .bubble {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.1);
-        animation: float 10s infinite ease-in-out;
-    }
+    /* Animated Pink Gradient */
+    background: linear-gradient(270deg, #ff4e9b, #ff6ec7, #ff9ad5);
+    background-size: 600% 600%;
+    animation: gradientMove 10s ease infinite;
+}
 
-    @keyframes float {
-        0%,100% { transform: translateY(0); }
-        50% { transform: translateY(-50px); }
-    }
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-    /* Glass Card */
-    .card {
-        backdrop-filter: blur(15px);
-        background: rgba(255,255,255,0.1);
-        padding: 40px;
-        border-radius: 20px;
-        text-align: center;
-        color: white;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        animation: fadeIn 1.2s ease;
-    }
+/* Header */
+.header {
+    padding: 15px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.15);
+}
 
-    @keyframes fadeIn {
-        from {opacity: 0; transform: scale(0.9);}
-        to {opacity: 1; transform: scale(1);}
-    }
+/* Search */
+.search {
+    padding: 10px;
+}
 
-    h1 {
-        margin-bottom: 10px;
-        font-size: 2rem;
-    }
+.search input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    background: rgba(255,255,255,0.2);
+    color: white;
+}
 
-    p {
-        margin-bottom: 20px;
-        opacity: 0.8;
-    }
+.search input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
 
-    button {
-        padding: 12px 25px;
-        border: none;
-        border-radius: 30px;
-        background: linear-gradient(45deg, #00c6ff, #0072ff);
-        color: white;
-        cursor: pointer;
-        transition: 0.3s;
-    }
+/* Grid */
+.grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 15px;
+}
 
-    button:hover {
-        transform: scale(1.1);
-    }
+/* Cards */
+.card {
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    text-align: center;
+    padding: 20px 10px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(255, 0, 120, 0.3);
+    transition: 0.3s;
+    cursor: pointer;
+}
 
-    .hidden {
-        display: none;
-        margin-top: 15px;
-        font-size: 1.1rem;
-        color: #fff;
-    }
+.card:hover {
+    transform: scale(1.07);
+    background: rgba(255,255,255,0.25);
+}
+
+.icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.6);
+}
+
+/* Bottom Nav */
+.nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+}
+
+.nav div {
+    text-align: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.nav div:hover {
+    color: #ffe6f2;
+}
+
+/* Hidden Message */
+.popup {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: none;
+}
 </style>
 </head>
 
 <body>
 
-<!-- Animated Background -->
-<div class="bubble" style="width:80px;height:80px;top:10%;left:20%;"></div>
-<div class="bubble" style="width:120px;height:120px;top:70%;left:60%;animation-duration:12s;"></div>
-<div class="bubble" style="width:60px;height:60px;top:40%;left:80%;animation-duration:8s;"></div>
+<div class="header">📚 Gaweshanayen Obbata</div>
 
-<!-- Main Card -->
-<div class="card">
-    <h1>Welcome 🚀</h1>
-    <p>This is your advanced HTML page</p>
-    <button onclick="showMessage()">Click Me</button>
-    <div id="msg" class="hidden">🔥 You unlocked the UI power!</div>
+<div class="search">
+    <input type="text" placeholder="Search knowledge..." oninput="searchContent(this.value)">
 </div>
 
+<div class="grid" id="grid">
+
+    <div class="card" data-name="science" onclick="openSection('Science')">
+        <div class="icon">🔬</div>
+        Science
+    </div>
+
+    <div class="card" data-name="technology" onclick="openSection('Technology')">
+        <div class="icon">💻</div>
+        Technology
+    </div>
+
+    <div class="card" data-name="history" onclick="openSection('History')">
+        <div class="icon">📜</div>
+        History
+    </div>
+
+    <div class="card" data-name="health" onclick="openSection('Health')">
+        <div class="icon">🧠</div>
+        Health
+    </div>
+
+    <div class="card" data-name="business" onclick="openSection('Business')">
+        <div class="icon">💼</div>
+        Business
+    </div>
+
+    <div class="card" data-name="ai" onclick="openSection('AI')">
+        <div class="icon">🤖</div>
+        AI
+    </div>
+
+</div>
+
+<div class="nav">
+    <div onclick="nav('Home')">🏠 Home</div>
+    <div onclick="nav('Saved')">⭐ Saved</div>
+    <div onclick="nav('Profile')">👤 Profile</div>
+</div>
+
+<div class="popup" id="popup"></div>
+
 <script>
-function showMessage() {
-    document.getElementById("msg").classList.toggle("hidden");
+// Open section
+function openSection(name) {
+    showPopup("Opening " + name + " 🚀");
 }
+
+// Bottom nav
+function nav(page) {
+    showPopup("Go to " + page);
+}
+
+// Popup message
+function showPopup(text) {
+    let popup = document.getElementById("popup");
+    popup.innerText = text;
+    popup.style.display = "block";
+
+    setTimeout(() => {
+        popup.style.display = "none";
+    }, 2000);
+}
+
+// Search filter
+function searchContent(value) {
+    let cards = document.querySelectorAll(".card");
+    value = value.toLowerCase();
+
+    cards.forEach(card => {
+        let name = card.getAttribute("data-name");
+        if (name.includes(value)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+
+// Disable right click
+document.addEventListener("contextmenu", e => e.preventDefault());
 </script>
 
 </body>
