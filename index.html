@@ -1,54 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Simple Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced UI</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: #f4f4f4;
-            margin: 0;
-            padding: 50px;
-        }
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', sans-serif;
+    }
 
-        .box {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            display: inline-block;
-        }
+    body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        overflow: hidden;
+    }
 
-        button {
-            padding: 10px 20px;
-            border: none;
-            background: #007BFF;
-            color: white;
-            border-radius: 8px;
-            cursor: pointer;
-        }
+    /* Floating background bubbles */
+    .bubble {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        animation: float 10s infinite ease-in-out;
+    }
 
-        button:hover {
-            background: #0056b3;
-        }
-    </style>
+    @keyframes float {
+        0%,100% { transform: translateY(0); }
+        50% { transform: translateY(-50px); }
+    }
+
+    /* Glass Card */
+    .card {
+        backdrop-filter: blur(15px);
+        background: rgba(255,255,255,0.1);
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        color: white;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: scale(0.9);}
+        to {opacity: 1; transform: scale(1);}
+    }
+
+    h1 {
+        margin-bottom: 10px;
+        font-size: 2rem;
+    }
+
+    p {
+        margin-bottom: 20px;
+        opacity: 0.8;
+    }
+
+    button {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 30px;
+        background: linear-gradient(45deg, #00c6ff, #0072ff);
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+    }
+
+    .hidden {
+        display: none;
+        margin-top: 15px;
+        font-size: 1.1rem;
+        color: #fff;
+    }
+</style>
 </head>
+
 <body>
 
-    <div class="box">
-        <h1>Hello 👋</h1>
-        <p>This is a simple HTML page.</p>
-        <button onclick="sayHello()">Click Me</button>
-    </div>
+<!-- Animated Background -->
+<div class="bubble" style="width:80px;height:80px;top:10%;left:20%;"></div>
+<div class="bubble" style="width:120px;height:120px;top:70%;left:60%;animation-duration:12s;"></div>
+<div class="bubble" style="width:60px;height:60px;top:40%;left:80%;animation-duration:8s;"></div>
 
-    <script>
-        function sayHello() {
-            alert("Hello! You clicked the button 😄");
-        }
-    </script>
+<!-- Main Card -->
+<div class="card">
+    <h1>Welcome 🚀</h1>
+    <p>This is your advanced HTML page</p>
+    <button onclick="showMessage()">Click Me</button>
+    <div id="msg" class="hidden">🔥 You unlocked the UI power!</div>
+</div>
+
+<script>
+function showMessage() {
+    document.getElementById("msg").classList.toggle("hidden");
+}
+</script>
 
 </body>
 </html>
