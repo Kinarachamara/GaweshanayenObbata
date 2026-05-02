@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Dashboard</title>
+</head>
+<body style="font-family: Arial; text-align:center; margin-top:50px;">
+<h1>Dashboard</h1>
+<h2 id="welcome"></h2>
+<h3 id="balance"></h3>
+<button onclick="logout()">Logout</button>
+<script>
+document.getElementById("welcome").innerText =
+&nbsp;&nbsp;&nbsp;&nbsp;"Welcome " + localStorage.getItem("name");
+document.getElementById("balance").innerText =
+&nbsp;&nbsp;&nbsp;&nbsp;"Balance: " + localStorage.getItem("balance");
+function logout() {
+&nbsp;&nbsp;&nbsp;&nbsp;localStorage.clear();
+&nbsp;&nbsp;&nbsp;&nbsp;window.location.href = "index.html";
+}
+</script>
+</body>
+</html>
+ 
+conveert this to the desing
