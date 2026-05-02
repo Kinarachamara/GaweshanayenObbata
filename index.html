@@ -11,203 +11,154 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', sans-serif;
-    user-select: none;
 }
 
 body {
-    margin-top: 5px;
     height: 100vh;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     color: white;
 
-    /* Dark Blue Gradient */
-    background: linear-gradient(270deg, #0f2027, #203a43, #2c5364);
-    background-size: 600% 600%;
-    animation: gradientMove 12s ease infinite;
+    /* Gradient from your image */
+    background: linear-gradient(135deg, 
+        #ff4e8a, 
+        #ff6f91, 
+        #ffc75f, 
+        #00c9a7, 
+        #845ec2
+    );
+    background-size: 400% 400%;
+    animation: bgMove 12s ease infinite;
 }
 
-@keyframes gradientMove {
+@keyframes bgMove {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Header */
-.header {
-    padding: 15px;
+/* Container */
+.container {
     text-align: center;
-    font-size: 1.4rem;
-    font-weight: bold;
-    backdrop-filter: blur(10px);
-    background: rgba(255,255,255,0.05);
-}
-
-/* Search */
-.search {
-    padding: 10px;
-}
-
-.search input {
-    width: 100%;
-    padding: 12px;
+    backdrop-filter: blur(15px);
+    background: rgba(0,0,0,0.25);
+    padding: 40px;
     border-radius: 25px;
-    border: none;
-    outline: none;
-    background: rgba(255,255,255,0.1);
-    color: white;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    animation: fadeIn 1.2s ease;
+    max-width: 350px;
 }
 
-.search input::placeholder {
-    color: rgba(255,255,255,0.6);
+@keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.9);}
+    to {opacity: 1; transform: scale(1);}
 }
 
-/* Grid */
-.grid {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    padding: 15px;
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
 }
 
-/* Cards */
-.card {
-    background: rgba(255,255,255,0.08);
-    border-radius: 20px;
-    text-align: center;
-    padding: 20px 10px;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.card:hover {
-    transform: scale(1.05);
-    background: rgba(255,255,255,0.15);
-}
-
-.icon {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    text-shadow: 0 0 8px rgba(255,255,255,0.4);
-}
-
-/* Bottom Nav */
-.nav {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(10px);
-}
-
-.nav div {
-    text-align: center;
+/* Tagline */
+.tagline {
     font-size: 0.9rem;
+    opacity: 0.85;
+    margin-bottom: 8px;
+}
+
+/* Sub text */
+.sub {
+    opacity: 0.9;
+    margin-bottom: 25px;
+}
+
+/* Buttons */
+button {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
-.nav div:hover {
-    color: #66d9ff;
+/* Get Started */
+#getStartBtn {
+    background: white;
+    color: black;
 }
 
-/* Popup */
-.popup {
-    position: fixed;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0,0,0,0.7);
-    padding: 10px 20px;
-    border-radius: 20px;
-    display: none;
+#getStartBtn.hide {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+}
+
+/* Auth buttons */
+.auth {
+    margin-top: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: 0.4s;
+}
+
+.auth.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.auth button {
+    margin: 6px;
+    background: rgba(255,255,255,0.9);
+    color: black;
+}
+
+button:hover {
+    transform: scale(1.08);
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">📚 Gaweshanayen Obbata</div>
+<div class="container">
+    <h1>📚 Gaweshanayen Obbata</h1>
+    
+    <p class="tagline">
+        Learn More, Earn More | Powered by Gaweshanaya Obbata Team
+    </p>
+    <button id="getStartBtn" onclick="showAuth()">Get Started</button>
 
-<div class="search">
-    <input type="text" placeholder="Search knowledge..." oninput="searchContent(this.value)">
+    <div class="auth" id="authBox">
+        <button onclick="goLogin()"> Login</button>
+        <button onclick="goSignup()">Create Account</button>
+    </div>
 </div>
-
-<div class="grid">
-
-    <div class="card" data-name="science" onclick="openSection('Science')">
-        <div class="icon">🔬</div>
-        Science
-    </div>
-
-    <div class="card" data-name="technology" onclick="openSection('Technology')">
-        <div class="icon">💻</div>
-        Technology
-    </div>
-
-    <div class="card" data-name="history" onclick="openSection('History')">
-        <div class="icon">📜</div>
-        History
-    </div>
-
-    <div class="card" data-name="health" onclick="openSection('Health')">
-        <div class="icon">🧠</div>
-        Health
-    </div>
-
-    <div class="card" data-name="business" onclick="openSection('Business')">
-        <div class="icon">💼</div>
-        Business
-    </div>
-
-    <div class="card" data-name="ai" onclick="openSection('AI')">
-        <div class="icon">🤖</div>
-        AI
-    </div>
-
-</div>
-
-<div class="nav">
-    <div onclick="nav('Home')">🏠 Home</div>
-    <div onclick="nav('Saved')">⭐ Saved</div>
-    <div onclick="nav('Profile')">👤 Profile</div>
-</div>
-
-<div class="popup" id="popup"></div>
 
 <script>
-function openSection(name) {
-    showPopup("Opening " + name + " 🚀");
-}
+function showAuth() {
+    const btn = document.getElementById("getStartBtn");
+    const auth = document.getElementById("authBox");
 
-function nav(page) {
-    showPopup("Go to " + page);
-}
-
-function showPopup(text) {
-    let popup = document.getElementById("popup");
-    popup.innerText = text;
-    popup.style.display = "block";
+    btn.classList.add("hide");
 
     setTimeout(() => {
-        popup.style.display = "none";
-    }, 2000);
+        btn.style.display = "none";
+        auth.classList.add("show");
+    }, 300);
 }
 
-function searchContent(value) {
-    let cards = document.querySelectorAll(".card");
-    value = value.toLowerCase();
-
-    cards.forEach(card => {
-        let name = card.getAttribute("data-name");
-        card.style.display = name.includes(value) ? "block" : "none";
-    });
+// Redirects
+function goLogin() {
+    window.location.href = "login.html";
 }
 
-document.addEventListener("contextmenu", e => e.preventDefault());
+function goSignup() {
+    window.location.href = "signup.html";
+}
 </script>
 
 </body>
