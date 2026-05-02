@@ -1,1 +1,193 @@
-wait
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Gaweshanayen Obbata</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    background: linear-gradient(135deg, 
+        #ff4e8a, 
+        #ff6f91, 
+        #ffc75f, 
+        #00c9a7, 
+        #845ec2
+    );
+    background-size: 400% 400%;
+    animation: bgMove 12s ease infinite;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Login Box */
+.login-box {
+    backdrop-filter: blur(15px);
+    background: rgba(0,0,0,0.3);
+    padding: 35px;
+    border-radius: 20px;
+    width: 320px;
+    text-align: center;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.9);}
+    to {opacity: 1; transform: scale(1);}
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+.input-group {
+    position: relative;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    background: rgba(255,255,255,0.15);
+    color: white;
+}
+
+/* Eye icon */
+.eye {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    background: #00c9a7;
+    color: black;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* Links */
+.links {
+    margin-top: 15px;
+    font-size: 0.85rem;
+}
+
+.links a {
+    color: #fff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Back */
+.back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+</style>
+</head>
+
+<body>
+
+<div class="back" onclick="goBack()">Back</div>
+
+<div class="login-box">
+    <h2>Login</h2>
+    <p>Welcome back to Gaweshanayen Obbata</p>
+
+    <input type="text" id="username" placeholder="Username">
+
+    <div class="input-group">
+        <input type="password" id="password" placeholder="Password">
+        <span class="eye" onclick="togglePassword()">Show</span>
+    </div>
+
+    <button onclick="login()">Login</button>
+
+    <div class="links">
+        <p>Don't have an account? 
+            <a onclick="goSignup()">Create one</a>
+        </p>
+    </div>
+</div>
+
+<script>
+function togglePassword() {
+    let pass = document.getElementById("password");
+    if (pass.type === "password") {
+        pass.type = "text";
+        document.querySelector(".eye").innerText = "Hide";
+    } else {
+        pass.type = "password";
+        document.querySelector(".eye").innerText = "Show";
+    }
+}
+
+function login() {
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    if(user === "" || pass === "") {
+        alert("Please fill all fields");
+        return;
+    }
+
+    localStorage.setItem("user", user);
+
+    alert("Login successful");
+
+    window.location.href = "home.html";
+}
+
+function goSignup() {
+    window.location.href = "signup.html";
+}
+
+function goBack() {
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
