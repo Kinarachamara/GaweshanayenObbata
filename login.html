@@ -19,7 +19,6 @@ body {
     justify-content: center;
     align-items: center;
     color: white;
-
     background: linear-gradient(135deg, 
         #ff4e8a, 
         #ff6f91, 
@@ -37,7 +36,6 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Login Box */
 .login-box {
     backdrop-filter: blur(15px);
     background: rgba(0,0,0,0.3);
@@ -54,7 +52,7 @@ body {
 }
 
 h2 {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 p {
@@ -63,20 +61,23 @@ p {
     margin-bottom: 20px;
 }
 
-/* Inputs */
 .input-group {
     position: relative;
 }
 
 input {
     width: 100%;
-    padding: 12px;
+    padding: 12px 15px;
     margin: 8px 0;
     border-radius: 25px;
     border: none;
     outline: none;
     background: rgba(255,255,255,0.15);
     color: white;
+}
+
+input::placeholder {
+    color: rgba(255,255,255,0.7);
 }
 
 /* Eye icon */
@@ -86,9 +87,19 @@ input {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+    font-size: 0.9rem;
+    user-select: none;
 }
 
-/* Button */
+/* Remember Me */
+.remember {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: 0.85rem;
+    margin: 8px 0 15px 5px;
+}
+
 button {
     width: 100%;
     padding: 12px;
@@ -96,6 +107,7 @@ button {
     border: none;
     background: #00c9a7;
     color: black;
+    font-weight: bold;
     cursor: pointer;
     margin-top: 10px;
     transition: 0.3s;
@@ -117,30 +129,35 @@ button:hover {
     cursor: pointer;
 }
 
-/* Back */
+/* Back Button */
 .back {
     position: absolute;
     top: 20px;
     left: 20px;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    opacity: 0.8;
 }
 </style>
 </head>
 
 <body>
 
-
 <div class="login-box">
-    <div class="back" onclick="goBack()"> < </div>
+    <div class="back" onclick="goBack()">←</div>
     <h2>Login</h2>
     <p>Welcome back to Gaweshanayen Obbata</p>
 
-    <input type="text" id="username" placeholder="Username">
+    <input type="email" id="email" placeholder="Email">
 
     <div class="input-group">
         <input type="password" id="password" placeholder="Password">
         <span class="eye" onclick="togglePassword()">Show</span>
+    </div>
+
+    <div class="remember">
+        <input type="checkbox" id="remember">
+        <label for="remember">&nbsp; Remember Me</label>
     </div>
 
     <button onclick="login()">Login</button>
@@ -153,31 +170,87 @@ button:hover {
 </div>
 
 <script>
+// Auto load remembered credentials
+window.onload = function() {
+    let savedEmail = localStorage.getItem("remember_email");
+    let savedPass = localStorage.getItem("remember_password");
+
+    if(savedEmail && savedPass) {
+        document.getElementById("email").value = savedEmail;
+        document.getElementById("password").value = savedPass;
+        document.getElementById("remember").checked = true;
+
+        // Optional: Auto login (uncomment if you want instant login)
+        // login();
+    }
+};
+
 function togglePassword() {
     let pass = document.getElementById("password");
+    let eye = document.querySelector(".eye");
+    
     if (pass.type === "password") {
         pass.type = "text";
-        document.querySelector(".eye").innerText = "Hide";
+        eye.innerText = "Hide";
     } else {
         pass.type = "password";
-        document.querySelector(".eye").innerText = "Show";
+        eye.innerText = "Show";
     }
 }
 
 function login() {
-    let user = document.getElementById("username").value;
-    let pass = document.getElementById("password").value;
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value;
+    let remember = document.getElementById("remember").checked;
 
-    if(user === "" || pass === "") {
+    if(email === "" || password === "") {
         alert("Please fill all fields");
         return;
     }
 
-    localStorage.setItem("user", user);
+    // Show loading state (optional)
+    const btn = document.querySelector("button");
+    const originalText = btn.innerHTML;
+    btn.innerHTML = "Logging in...";
+    btn.disabled = true;
 
-    alert("Login successful");
+    fetch("https://script.google.com/macros/s/AKfycbxGA5dYWfffI8rIVkLoB1TFADCjeITNqACOh8q1dPZwpeRY6p1VPiRITXHDPtjvrSAQ4g/exec", {
+        method: "POST",
+        body: JSON.stringify({
+            email: email,
+            password: password
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.status === "success") {
+            // Save session data
+            localStorage.setItem("name", data.name);
+            localStorage.setItem("balance", data.balance);
 
-    window.location.href = "home.html";
+            // Remember Me
+            if(remember) {
+                localStorage.setItem("remember_email", email);
+                localStorage.setItem("remember_password", password);
+            } else {
+                localStorage.removeItem("remember_email");
+                localStorage.removeItem("remember_password");
+            }
+
+            alert("Login successful!");
+            window.location.href = "dashboard.html";
+        } else {
+            alert("Invalid email or password");
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Connection error. Please try again.");
+    })
+    .finally(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    });
 }
 
 function goSignup() {
