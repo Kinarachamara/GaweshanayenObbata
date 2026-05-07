@@ -6,260 +6,166 @@
 <title>Login - Gaweshanayen Obbata</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
 }
 
-body {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    background: linear-gradient(135deg, 
-        #ff4e8a, 
-        #ff6f91, 
-        #ffc75f, 
-        #00c9a7, 
-        #845ec2
-    );
-    background-size: 400% 400%;
-    animation: bgMove 12s ease infinite;
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff4e8a,#845ec2);
+    overflow:hidden;
 }
 
-@keyframes bgMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+.box{
+    width:330px;
+    background:rgba(0,0,0,0.35);
+    backdrop-filter:blur(15px);
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    color:white;
+    animation:fade 1s ease;
 }
 
-.login-box {
-    backdrop-filter: blur(15px);
-    background: rgba(0,0,0,0.3);
-    padding: 35px;
-    border-radius: 20px;
-    width: 320px;
-    text-align: center;
-    animation: fadeIn 1s ease;
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-@keyframes fadeIn {
-    from {opacity: 0; transform: scale(0.9);}
-    to {opacity: 1; transform: scale(1);}
+h2{
+    margin-bottom:10px;
 }
 
-h2 {
-    margin-bottom: 10px;
+p{
+    font-size:14px;
+    opacity:.8;
+    margin-bottom:20px;
 }
 
-p {
-    font-size: 0.85rem;
-    opacity: 0.8;
-    margin-bottom: 20px;
+input{
+    width:100%;
+    padding:12px;
+    border:none;
+    outline:none;
+    border-radius:30px;
+    margin:10px 0;
+    background:rgba(255,255,255,0.15);
+    color:white;
 }
 
-.input-group {
-    position: relative;
+input::placeholder{
+    color:#ddd;
 }
 
-input {
-    width: 100%;
-    padding: 12px 15px;
-    margin: 8px 0;
-    border-radius: 25px;
-    border: none;
-    outline: none;
-    background: rgba(255,255,255,0.15);
-    color: white;
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:30px;
+    background:#00c9a7;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
 }
 
-input::placeholder {
-    color: rgba(255,255,255,0.7);
+button:hover{
+    transform:scale(1.03);
 }
 
-/* Eye icon */
-.eye {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 0.9rem;
-    user-select: none;
-}
-
-/* Remember Me */
-.remember {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    font-size: 0.85rem;
-    margin: 8px 0 15px 5px;
-}
-
-button {
-    width: 100%;
-    padding: 12px;
-    border-radius: 25px;
-    border: none;
-    background: #00c9a7;
-    color: black;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: 0.3s;
-}
-
-button:hover {
-    transform: scale(1.05);
-}
-
-/* Links */
-.links {
-    margin-top: 15px;
-    font-size: 0.85rem;
-}
-
-.links a {
-    color: #fff;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-/* Back Button */
-.back {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    cursor: pointer;
-    font-size: 1.8rem;
-    opacity: 0.8;
+.status{
+    margin-top:15px;
+    font-size:14px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="login-box">
-    <div class="back" onclick="goBack()">←</div>
+<div class="box">
     <h2>Login</h2>
-    <p>Welcome back to Gaweshanayen Obbata</p>
+    <p>Login using Username or Gmail</p>
 
-    <input type="email" id="email" placeholder="Email">
-
-    <div class="input-group">
-        <input type="password" id="password" placeholder="Password">
-        <span class="eye" onclick="togglePassword()">Show</span>
-    </div>
-
-    <div class="remember">
-        <input type="checkbox" id="remember">
-        <label for="remember">&nbsp; Remember Me</label>
-    </div>
+    <input type="text" id="user" placeholder="Username or Gmail">
+    <input type="password" id="password" placeholder="Password">
 
     <button onclick="login()">Login</button>
 
-    <div class="links">
-        <p>Don't have an account? 
-            <a onclick="goSignup()">Create one</a>
-        </p>
-    </div>
+    <div class="status" id="status"></div>
 </div>
 
 <script>
-// Auto load remembered credentials
-window.onload = function() {
-    let savedEmail = localStorage.getItem("remember_email");
-    let savedPass = localStorage.getItem("remember_password");
 
-    if(savedEmail && savedPass) {
-        document.getElementById("email").value = savedEmail;
-        document.getElementById("password").value = savedPass;
-        document.getElementById("remember").checked = true;
+const SHEET_API = "https://opensheet.elk.sh/1DscsyGIfN_gmCbYv2IkjdzsxF5j_ok6uSZEDGvGWOI4/ABC";
 
-        // Optional: Auto login (uncomment if you want instant login)
-        // login();
-    }
-};
+async function login(){
 
-function togglePassword() {
-    let pass = document.getElementById("password");
-    let eye = document.querySelector(".eye");
-    
-    if (pass.type === "password") {
-        pass.type = "text";
-        eye.innerText = "Hide";
-    } else {
-        pass.type = "password";
-        eye.innerText = "Show";
-    }
-}
+    let user = document.getElementById("user").value.trim();
+    let password = document.getElementById("password").value.trim();
 
-function login() {
-    let email = document.getElementById("email").value.trim();
-    let password = document.getElementById("password").value;
-    let remember = document.getElementById("remember").checked;
+    const status = document.getElementById("status");
 
-    if(email === "" || password === "") {
-        alert("Please fill all fields");
+    if(user === "" || password === ""){
+        status.innerText = "Please fill all fields";
         return;
     }
 
-    // Show loading state (optional)
-    const btn = document.querySelector("button");
-    const originalText = btn.innerHTML;
-    btn.innerHTML = "Logging in...";
-    btn.disabled = true;
+    status.innerText = "Checking...";
 
-    fetch("https://script.google.com/macros/s/AKfycbxGA5dYWfffI8rIVkLoB1TFADCjeITNqACOh8q1dPZwpeRY6p1VPiRITXHDPtjvrSAQ4g/exec", {
-        method: "POST",
-        body: JSON.stringify({
-            email: email,
-            password: password
-        })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if(data.status === "success") {
-            // Save session data
-            localStorage.setItem("name", data.name);
-            localStorage.setItem("balance", data.balance);
+    try{
 
-            // Remember Me
-            if(remember) {
-                localStorage.setItem("remember_email", email);
-                localStorage.setItem("remember_password", password);
-            } else {
-                localStorage.removeItem("remember_email");
-                localStorage.removeItem("remember_password");
+        const response = await fetch(SHEET_API);
+        const data = await response.json();
+
+        let found = false;
+
+        data.forEach(account => {
+
+            const username = account.Username;
+            const gmail = account["Gmail "];
+            const pass = account.PasswordHash;
+
+            if(
+                (user === username || user === gmail)
+                &&
+                password === pass
+            ){
+                found = true;
+
+                localStorage.setItem("username", username);
+                localStorage.setItem("name", account.name);
+                localStorage.setItem("gmail", gmail);
+                localStorage.setItem("balance", account.Balance);
+                localStorage.setItem("refid", account.RefID);
+
+                window.location.href = "home.html";
             }
 
-            alert("Login successful!");
-            window.location.href = "dashboard.html";
-        } else {
-            alert("Invalid email or password");
+        });
+
+        if(!found){
+            status.innerText = "Invalid login details";
         }
-    })
-    .catch(err => {
-        console.error(err);
-        alert("Connection error. Please try again.");
-    })
-    .finally(() => {
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-    });
+
+    }catch(err){
+        console.log(err);
+        status.innerText = "Connection error";
+    }
+
 }
 
-function goSignup() {
-    window.location.href = "signup.html";
-}
-
-function goBack() {
-    window.location.href = "index.html";
-}
 </script>
 
 </body>
