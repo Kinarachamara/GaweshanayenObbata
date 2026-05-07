@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home - Gaweshanayen Obbata</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+    user-select:none;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#ff4e8a,#845ec2);
+    padding:20px;
+    color:white;
+}
+
+/* HEADER */
+
+.header{
+    width:100%;
+    background:rgba(0,0,0,0.35);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:20px;
+    animation:fade 1s ease;
+}
+
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.logout{
+    background:#ff4e8a;
+    border:none;
+    color:white;
+    padding:10px 18px;
+    border-radius:30px;
+    cursor:pointer;
+}
+
+/* USER CARD */
+
+.user-card{
+    margin-top:20px;
+    background:rgba(0,0,0,0.35);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:25px;
+    animation:fade 1.2s ease;
+}
+
+.user-name{
+    font-size:26px;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.user-gmail{
+    opacity:.8;
+    margin-bottom:20px;
+}
+
+/* BALANCE */
+
+.balance-box{
+    background:rgba(255,255,255,0.12);
+    border-radius:20px;
+    padding:20px;
+    margin-top:10px;
+}
+
+.balance-title{
+    opacity:.7;
+    margin-bottom:8px;
+}
+
+.balance{
+    font-size:32px;
+    font-weight:bold;
+}
+
+/* INFO GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-top:20px;
+}
+
+.card{
+    background:rgba(255,255,255,0.12);
+    padding:18px;
+    border-radius:18px;
+}
+
+.card-title{
+    opacity:.7;
+    margin-bottom:8px;
+    font-size:14px;
+}
+
+.card-value{
+    font-size:18px;
+    font-weight:bold;
+}
+
+/* ACTION BUTTONS */
+
+.actions{
+    margin-top:25px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.action-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:30px;
+    background:#00c9a7;
+    color:black;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.action-btn:hover{
+    transform:scale(1.02);
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    margin-top:30px;
+    opacity:.7;
+    font-size:13px;
+}
+
+/* ANIMATION */
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="top">
+        <div class="logo">Gaweshanayen Obbata</div>
+        <button class="logout" onclick="logout()">Logout</button>
+    </div>
+</div>
+
+<div class="user-card">
+
+    <div class="user-name" id="name">User</div>
+    <div class="user-gmail" id="gmail">gmail@gmail.com</div>
+
+    <div class="balance-box">
+        <div class="balance-title">Current Balance</div>
+        <div class="balance" id="balance">Rs. 0</div>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="card-title">Username</div>
+            <div class="card-value" id="username">-</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Ref ID</div>
+            <div class="card-value" id="refid">-</div>
+        </div>
+
+    </div>
+
+    <div class="actions">
+        <button class="action-btn">Knowledge Center</button>
+        <button class="action-btn">My Earnings</button>
+        <button class="action-btn">Learning Dashboard</button>
+    </div>
+
+</div>
+
+<div class="footer">
+    Learn More, Earn More | Powered by Gaweshanaya Obbata Team
+</div>
+
+<script>
+
+// GET USER DATA
+
+const name = localStorage.getItem("name");
+const gmail = localStorage.getItem("gmail");
+const balance = localStorage.getItem("balance");
+const username = localStorage.getItem("username");
+const refid = localStorage.getItem("refid");
+
+// SHOW DATA
+
+document.getElementById("name").innerText = name;
+document.getElementById("gmail").innerText = gmail;
+document.getElementById("balance").innerText = "Rs. " + balance;
+document.getElementById("username").innerText = username;
+document.getElementById("refid").innerText = refid;
+
+// LOGOUT
+
+function logout(){
+    localStorage.clear();
+    window.location.href = "index.html";
+}
+
+</script>
+
+</body>
+</html>
