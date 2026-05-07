@@ -1,17 +1,498 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home - Gaweshanayen Obbata</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+    user-select:none;
+}
+
+body{
+    background:linear-gradient(135deg,#ff4e8a,#845ec2);
+    min-height:100vh;
+    color:white;
+    padding-bottom:100px;
+}
+
+/* TOP BAR */
+
+.topbar{
+    position:sticky;
+    top:0;
+    width:100%;
+    padding:15px;
+    background:rgba(0,0,0,0.35);
+    backdrop-filter:blur(15px);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:999;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.profile img{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid rgba(255,255,255,0.3);
+}
+
+/* WELCOME */
+
+.welcome{
+    padding:20px;
+}
+
+.welcome h2{
+    font-size:28px;
+}
+
+.welcome p{
+    opacity:.8;
+    margin-top:5px;
+}
+
+/* STORIES */
+
+.stories{
+    display:flex;
+    overflow:auto;
+    gap:15px;
+    padding:0 20px 20px 20px;
+}
+
+.story{
+    min-width:80px;
+    text-align:center;
+}
+
+.story img{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    border:3px solid #00c9a7;
+    object-fit:cover;
+}
+
+.story p{
+    font-size:12px;
+    margin-top:6px;
+}
+
+/* POST */
+
+.feed{
+    padding:0 15px;
+}
+
+.post{
+    background:rgba(0,0,0,0.35);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    margin-bottom:20px;
+    overflow:hidden;
+    animation:fade 0.8s ease;
+}
+
+/* POST HEADER */
+
+.post-top{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:15px;
+}
+
+.post-top img{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.post-name{
+    font-weight:bold;
+}
+
+.post-time{
+    font-size:12px;
+    opacity:.7;
+    margin-top:2px;
+}
+
+/* POST IMAGE */
+
+.post-image{
+    width:100%;
+    max-height:400px;
+    object-fit:cover;
+}
+
+/* POST CONTENT */
+
+.post-content{
+    padding:15px;
+}
+
+.post-content p{
+    line-height:1.5;
+    opacity:.9;
+}
+
+/* ACTIONS */
+
+.post-actions{
+    display:flex;
+    justify-content:space-around;
+    padding:15px;
+    border-top:1px solid rgba(255,255,255,0.08);
+}
+
+.post-actions button{
+    background:none;
+    border:none;
+    color:white;
+    cursor:pointer;
+    font-size:14px;
+    opacity:.8;
+}
+
+.post-actions button:hover{
+    opacity:1;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter:blur(15px);
+    display:flex;
+    justify-content:space-around;
+    padding:15px 0;
+}
+
+.nav-btn{
+    background:none;
+    border:none;
+    color:white;
+    font-size:14px;
+    cursor:pointer;
+}
+
+/* ANIMATION */
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+</style>
+</head>
+
 <body>
 
-<h2 id="name"></h2>
-<p id="balance"></p>
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+    <div class="logo">
+        Gaweshanayen Obbata
+    </div>
+
+    <div class="profile">
+
+        <img id="profileImage"
+        src="https://via.placeholder.com/150">
+
+    </div>
+
+</div>
+
+<!-- WELCOME -->
+
+<div class="welcome">
+
+    <h2 id="name">
+        Welcome
+    </h2>
+
+    <p>
+        Learn More, Earn More
+    </p>
+
+</div>
+
+<!-- STORIES -->
+
+<div class="stories">
+
+    <div class="story">
+        <img src="https://picsum.photos/100?1">
+        <p>Science</p>
+    </div>
+
+    <div class="story">
+        <img src="https://picsum.photos/100?2">
+        <p>Business</p>
+    </div>
+
+    <div class="story">
+        <img src="https://picsum.photos/100?3">
+        <p>Tech</p>
+    </div>
+
+    <div class="story">
+        <img src="https://picsum.photos/100?4">
+        <p>AI</p>
+    </div>
+
+    <div class="story">
+        <img src="https://picsum.photos/100?5">
+        <p>Money</p>
+    </div>
+
+</div>
+
+<!-- FEED -->
+
+<div class="feed">
+
+    <!-- POST 1 -->
+
+    <div class="post">
+
+        <div class="post-top">
+
+            <img src="https://picsum.photos/100?6">
+
+            <div>
+                <div class="post-name">
+                    Gaweshanayen Obbata
+                </div>
+
+                <div class="post-time">
+                    2 hours ago
+                </div>
+            </div>
+
+        </div>
+
+        <img class="post-image"
+        src="https://picsum.photos/600/400?7">
+
+        <div class="post-content">
+
+            <p>
+                Welcome to the future learning platform.
+                Explore technology, innovation, AI,
+                and powerful educational content.
+            </p>
+
+        </div>
+
+        <div class="post-actions">
+
+            <button onclick="likePost(this)">
+                Like
+            </button>
+
+            <button onclick="commentPost()">
+                Comment
+            </button>
+
+            <button onclick="sharePost()">
+                Share
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- POST 2 -->
+
+    <div class="post">
+
+        <div class="post-top">
+
+            <img src="https://picsum.photos/100?8">
+
+            <div>
+                <div class="post-name">
+                    Knowledge Team
+                </div>
+
+                <div class="post-time">
+                    Yesterday
+                </div>
+            </div>
+
+        </div>
+
+        <img class="post-image"
+        src="https://picsum.photos/600/400?9">
+
+        <div class="post-content">
+
+            <p>
+                Success starts with knowledge.
+                Every lesson you learn today
+                becomes your power tomorrow.
+            </p>
+
+        </div>
+
+        <div class="post-actions">
+
+            <button onclick="likePost(this)">
+                Like
+            </button>
+
+            <button onclick="commentPost()">
+                Comment
+            </button>
+
+            <button onclick="sharePost()">
+                Share
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+
+<div class="bottom-nav">
+
+    <button class="nav-btn"
+    onclick="goHome()">
+
+    Home
+
+    </button>
+
+    <button class="nav-btn"
+    onclick="goDashboard()">
+
+    Dashboard
+
+    </button>
+
+    <button class="nav-btn"
+    onclick="logout()">
+
+    Logout
+
+    </button>
+
+</div>
 
 <script>
-document.getElementById("name").innerText =
-    "Welcome " + localStorage.getItem("userName");
 
-document.getElementById("balance").innerText =
-    "Balance: " + localStorage.getItem("balance");
+/* USER DATA */
+
+const name =
+localStorage.getItem("name");
+
+const profileImage =
+localStorage.getItem("profileImage");
+
+/* SHOW USER */
+
+document.getElementById("name").innerText =
+"Hello, " + name;
+
+/* PROFILE IMAGE */
+
+if(profileImage){
+
+    document.getElementById("profileImage").src =
+    profileImage;
+
+}
+
+/* LIKE */
+
+function likePost(btn){
+
+    btn.innerText = "Liked";
+
+}
+
+/* COMMENT */
+
+function commentPost(){
+
+    alert("Comment system coming soon");
+
+}
+
+/* SHARE */
+
+function sharePost(){
+
+    alert("Share feature coming soon");
+
+}
+
+/* NAVIGATION */
+
+function goHome(){
+
+    location.href = "home.html";
+
+}
+
+function goDashboard(){
+
+    location.href = "dashboard.html";
+
+}
+
+/* LOGOUT */
+
+function logout(){
+
+    localStorage.clear();
+
+    location.href = "index.html";
+
+}
+
 </script>
 
 </body>
 </html>
+```
+    
