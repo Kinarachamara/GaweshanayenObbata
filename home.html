@@ -3,33 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home - Gaweshanayen Obbata</title>
+<title>Gaweshanayen Obbata</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     user-select:none;
 }
 
 body{
     min-height:100vh;
-    background:linear-gradient(135deg,#ff4e8a,#845ec2);
-    padding:20px;
+    background:
+    linear-gradient(135deg,#ff4e8a,#845ec2,#00c9a7);
+    background-size:400% 400%;
+    animation:bg 12s ease infinite;
     color:white;
+    padding:18px;
+    overflow-x:hidden;
+}
+
+@keyframes bg{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
 /* HEADER */
 
 .header{
     width:100%;
-    background:rgba(0,0,0,0.35);
-    backdrop-filter:blur(15px);
-    border-radius:20px;
-    padding:20px;
+    background:rgba(0,0,0,0.28);
+    backdrop-filter:blur(18px);
+    border-radius:25px;
+    padding:18px;
     animation:fade 1s ease;
+    border:1px solid rgba(255,255,255,0.08);
 }
 
 .top{
@@ -38,59 +50,90 @@ body{
     align-items:center;
 }
 
-.logo{
-    font-size:22px;
-    font-weight:bold;
+/* PROFILE */
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
+
+.profile img{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid rgba(255,255,255,0.3);
+    box-shadow:0 0 20px rgba(0,0,0,0.2);
+}
+
+.profile-info h2{
+    font-size:20px;
+}
+
+.profile-info p{
+    opacity:.8;
+    font-size:13px;
+    margin-top:3px;
+}
+
+/* LOGOUT */
 
 .logout{
-    background:#ff4e8a;
     border:none;
+    background:rgba(255,255,255,0.12);
     color:white;
-    padding:10px 18px;
+    padding:12px 18px;
     border-radius:30px;
     cursor:pointer;
+    transition:.3s;
+    backdrop-filter:blur(10px);
 }
 
-/* USER CARD */
+.logout:hover{
+    transform:scale(1.05);
+}
 
-.user-card{
-    margin-top:20px;
-    background:rgba(0,0,0,0.35);
-    backdrop-filter:blur(15px);
-    border-radius:20px;
-    padding:25px;
+/* BALANCE CARD */
+
+.balance-card{
+    margin-top:22px;
+    background:rgba(0,0,0,0.28);
+    backdrop-filter:blur(18px);
+    border-radius:28px;
+    padding:28px;
     animation:fade 1.2s ease;
+    border:1px solid rgba(255,255,255,0.08);
+    position:relative;
+    overflow:hidden;
 }
 
-.user-name{
-    font-size:26px;
-    font-weight:bold;
-    margin-bottom:5px;
-}
-
-.user-gmail{
-    opacity:.8;
-    margin-bottom:20px;
-}
-
-/* BALANCE */
-
-.balance-box{
-    background:rgba(255,255,255,0.12);
-    border-radius:20px;
-    padding:20px;
-    margin-top:10px;
+.balance-card::before{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    background:rgba(255,255,255,0.06);
+    border-radius:50%;
+    top:-120px;
+    right:-100px;
 }
 
 .balance-title{
-    opacity:.7;
-    margin-bottom:8px;
+    opacity:.75;
+    font-size:14px;
 }
 
 .balance{
-    font-size:32px;
+    font-size:42px;
     font-weight:bold;
+    margin-top:10px;
+}
+
+.balance-sub{
+    margin-top:8px;
+    opacity:.75;
+    font-size:14px;
 }
 
 /* INFO GRID */
@@ -99,57 +142,65 @@ body{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:15px;
-    margin-top:20px;
+    margin-top:22px;
 }
 
 .card{
-    background:rgba(255,255,255,0.12);
-    padding:18px;
-    border-radius:18px;
+    background:rgba(0,0,0,0.25);
+    backdrop-filter:blur(15px);
+    border-radius:22px;
+    padding:22px;
+    border:1px solid rgba(255,255,255,0.08);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-4px);
 }
 
 .card-title{
     opacity:.7;
-    margin-bottom:8px;
-    font-size:14px;
+    font-size:13px;
 }
 
 .card-value{
-    font-size:18px;
+    margin-top:8px;
+    font-size:19px;
     font-weight:bold;
 }
 
-/* ACTION BUTTONS */
+/* MENU */
 
-.actions{
+.menu{
     margin-top:25px;
     display:flex;
     flex-direction:column;
-    gap:15px;
+    gap:16px;
 }
 
-.action-btn{
+.menu button{
     width:100%;
-    padding:15px;
+    padding:17px;
     border:none;
     border-radius:30px;
-    background:#00c9a7;
-    color:black;
-    font-size:16px;
-    font-weight:bold;
+    background:rgba(255,255,255,0.14);
+    color:white;
+    font-size:15px;
     cursor:pointer;
     transition:.3s;
+    backdrop-filter:blur(12px);
 }
 
-.action-btn:hover{
+.menu button:hover{
     transform:scale(1.02);
+    background:rgba(255,255,255,0.2);
 }
 
 /* FOOTER */
 
 .footer{
-    text-align:center;
     margin-top:30px;
+    text-align:center;
     opacity:.7;
     font-size:13px;
 }
@@ -166,57 +217,117 @@ body{
         transform:translateY(0);
     }
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <div class="header">
+
     <div class="top">
-        <div class="logo">Gaweshanayen Obbata</div>
-        <button class="logout" onclick="logout()">Logout</button>
-    </div>
-</div>
 
-<div class="user-card">
+        <div class="profile">
 
-    <div class="user-name" id="name">User</div>
-    <div class="user-gmail" id="gmail">gmail@gmail.com</div>
+            <!-- BASE64 IMAGE -->
+            <img id="profileImage" src="" alt="Profile">
 
-    <div class="balance-box">
-        <div class="balance-title">Current Balance</div>
-        <div class="balance" id="balance">Rs. 0</div>
-    </div>
+            <div class="profile-info">
+                <h2 id="name">User</h2>
+                <p id="gmail">gmail@gmail.com</p>
+            </div>
 
-    <div class="grid">
-
-        <div class="card">
-            <div class="card-title">Username</div>
-            <div class="card-value" id="username">-</div>
         </div>
 
-        <div class="card">
-            <div class="card-title">Ref ID</div>
-            <div class="card-value" id="refid">-</div>
-        </div>
+        <button class="logout" onclick="logout()">
+            Logout
+        </button>
 
-    </div>
-
-    <div class="actions">
-        <button class="action-btn">Knowledge Center</button>
-        <button class="action-btn">My Earnings</button>
-        <button class="action-btn">Learning Dashboard</button>
     </div>
 
 </div>
+
+<!-- BALANCE -->
+
+<div class="balance-card">
+
+    <div class="balance-title">
+        Current Balance
+    </div>
+
+    <div class="balance" id="balance">
+        Rs. 0
+    </div>
+
+    <div class="balance-sub">
+        Learn More, Earn More
+    </div>
+
+</div>
+
+<!-- INFO -->
+
+<div class="grid">
+
+    <div class="card">
+        <div class="card-title">
+            Username
+        </div>
+
+        <div class="card-value" id="username">
+            -
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title">
+            Ref ID
+        </div>
+
+        <div class="card-value" id="refid">
+            -
+        </div>
+    </div>
+
+</div>
+
+<!-- MENU -->
+
+<div class="menu">
+
+    <button>
+        Knowledge Center
+    </button>
+
+    <button>
+        Learning Dashboard
+    </button>
+
+    <button>
+        My Earnings
+    </button>
+
+    <button>
+        Premium Courses
+    </button>
+
+</div>
+
+<!-- FOOTER -->
 
 <div class="footer">
-    Learn More, Earn More | Powered by Gaweshanaya Obbata Team
+    Learn More, Earn More | Powered by Gaweshanayen Obbata Team
 </div>
 
 <script>
 
-// GET USER DATA
+/*
+========================================
+LOCAL STORAGE DATA
+========================================
+*/
 
 const name = localStorage.getItem("name");
 const gmail = localStorage.getItem("gmail");
@@ -224,22 +335,71 @@ const balance = localStorage.getItem("balance");
 const username = localStorage.getItem("username");
 const refid = localStorage.getItem("refid");
 
-// SHOW DATA
+/*
+========================================
+BASE64 PROFILE IMAGE
+========================================
 
-document.getElementById("name").innerText = name;
-document.getElementById("gmail").innerText = gmail;
-document.getElementById("balance").innerText = "Rs. " + balance;
-document.getElementById("username").innerText = username;
-document.getElementById("refid").innerText = refid;
+👉 Put this in your Google Sheet:
+data:image/png;base64,iVBORw0KGgoAAA...
 
-// LOGOUT
+Then save to localStorage when login.
+*/
+
+const profileImage =
+localStorage.getItem("profileImage");
+
+/*
+========================================
+SHOW DATA
+========================================
+*/
+
+document.getElementById("name").innerText =
+name || "User";
+
+document.getElementById("gmail").innerText =
+gmail || "No Gmail";
+
+document.getElementById("balance").innerText =
+"Rs. " + (balance || "0");
+
+document.getElementById("username").innerText =
+username || "-";
+
+document.getElementById("refid").innerText =
+refid || "-";
+
+/*
+========================================
+SHOW PROFILE IMAGE
+========================================
+*/
+
+if(profileImage){
+    document.getElementById("profileImage").src =
+    profileImage;
+}else{
+    document.getElementById("profileImage").src =
+    "https://via.placeholder.com/150";
+}
+
+/*
+========================================
+LOGOUT
+========================================
+*/
 
 function logout(){
+
     localStorage.clear();
-    window.location.href = "index.html";
+
+    window.location.href =
+    "index.html";
+
 }
 
 </script>
 
 </body>
-</html>
+        </html>
