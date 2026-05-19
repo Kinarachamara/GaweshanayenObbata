@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaweshanayen Obbata</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    /* Gradient from your image */
+    background: linear-gradient(135deg, 
+        #ff4e8a, 
+        #ff6f91, 
+        #ffc75f, 
+        #00c9a7, 
+        #845ec2
+    );
+    background-size: 400% 400%;
+    animation: bgMove 12s ease infinite;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Container */
+.container {
+    text-align: center;
+    backdrop-filter: blur(15px);
+    background: rgba(0,0,0,0.25);
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    animation: fadeIn 1.2s ease;
+    max-width: 350px;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.9);}
+    to {opacity: 1; transform: scale(1);}
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+/* Tagline */
+.tagline {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    margin-bottom: 8px;
+}
+
+/* Sub text */
+.sub {
+    opacity: 0.9;
+    margin-bottom: 25px;
+}
+
+/* Buttons */
+button {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Get Started */
+#getStartBtn {
+    background: white;
+    color: black;
+}
+
+#getStartBtn.hide {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+}
+
+/* Auth buttons */
+.auth {
+    margin-top: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: 0.4s;
+}
+
+.auth.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.auth button {
+    margin: 6px;
+    background: rgba(255,255,255,0.9);
+    color: black;
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>📚 Gaweshanayen Obbata</h1>
+    
+    <p class="tagline">
+        Learn More, Earn More | Powered by Gaweshanaya Obbata Team
+    </p>
+    <button id="getStartBtn" onclick="showAuth()">Get Started</button>
+
+    <div class="auth" id="authBox">
+        <button onclick="goLogin()"> Login</button>
+        <button onclick="goSignup()">Create Account</button>
+    </div>
+</div>
+
+<script>
+function showAuth() {
+    const btn = document.getElementById("getStartBtn");
+    const auth = document.getElementById("authBox");
+
+    btn.classList.add("hide");
+
+    setTimeout(() => {
+        btn.style.display = "none";
+        auth.classList.add("show");
+    }, 300);
+}
+
+// Redirects
+function goLogin() {
+    window.location.href = "login.html";
+}
+
+function goSignup() {
+    window.location.href = "signup.html";
+}
+</script>
+
+</body>
+</html>
